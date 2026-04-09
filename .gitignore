@@ -26,3 +26,6 @@ venv.bak/
 .mypy_cache/
 .pytest_cache/
 .vscode/
+.env
+.env.example
+.
