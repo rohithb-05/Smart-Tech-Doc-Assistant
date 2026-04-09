@@ -1,6 +1,7 @@
 import os
 from fastapi import FastAPI, UploadFile, File, HTTPException, Form
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 import uuid
 import tempfile
 import uvicorn
@@ -17,8 +18,16 @@ from app.core.llm import run_rag_pipeline
 
 app = FastAPI(title="Smart Tech-Doc Assistant")
 
+# Mount static files folder
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 class QueryRequest(BaseModel):
     query: str
+
+@app.get("/")
+def serve_ui():
+    """Serve the frontend UI."""
+    return FileResponse("static/index.html")
 
 @app.post("/docs/ingest")
 async def ingest_document(file: UploadFile = File(...)):

@@ -13,7 +13,7 @@ def generate_draft(query: str, context: str) -> str:
     """
     Step 1: Generate an answer based on the context using Gemini.
     """
-    model = genai.GenerativeModel('gemini-1.5-pro-latest')  # or gemini-pro
+    model = genai.GenerativeModel('gemini-1.5-flash')  # or gemini-pro
     
     prompt = f"""
     You are a technical documentation assistant. 
@@ -41,7 +41,7 @@ def verify_content(query: str, draft: str, context: str) -> str:
         # but let's verify general correctness anyway to be safe.
         pass
         
-    model = genai.GenerativeModel('gemini-1.5-pro-latest')
+    model = genai.GenerativeModel('gemini-1.5-flash')
     
     prompt = f"""
     You are an expert code reviewer and technical verifier.
